@@ -1,0 +1,25 @@
+{
+  "name": "github-cloner",
+  "version": "0.0.1",
+  "description": "An interactive command line tool to list and clone your Github repositories",
+  "main": "github-cloner.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/floriancargoet/github-cloner.git"
+  },
+  "keywords": [
+    "github",
+    "git",
+    "clone"
+  ],
+  "author": "Florian Cargoët",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "optimist": "~0.5.0",
+    "read": "~1.0.4",
+    "async": "~0.2.8",
+    "ncurses": "git://github.com/mscdex/node-ncurses.git#21c89063c6a8081a987b3bf475551f80667bdf00",
+    "request": "~2.21.0"
+  }
+}
