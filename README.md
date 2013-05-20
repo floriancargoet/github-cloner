@@ -11,10 +11,16 @@ Dependencies
 Installation
 ------------
 
+###NPM
+
+    (sudo) npm install -g github-cloner
+
+###Sources
     git clone https://github.com/floriancargoet/github-cloner.git
     npm install
 
 To do
 -----
- - GET /user/repos (authenticated)
+ - GET /user/repos (authenticated, to fetch private repositories too)
  - Check if clone already exists in directory
+ - Better ncurses widget (checkboxes)
