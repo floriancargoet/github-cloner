@@ -6,7 +6,7 @@ var async    = require('async');
 var tasks = require('./tasks.js');
 
 var argv = optimist
-    .usage('Clone your GitHub repositories.\nUsage: $0')
+    .usage('Clone your GitHub repositories.\nUsage: $0 [OPTION...]')
 
     .alias('username', 'u')
     .describe('username', 'GitHub username, asked interactively if not given')
@@ -17,8 +17,23 @@ var argv = optimist
     .alias('all', 'a')
     .describe('all', 'Clone all repositories, non interactive')
 
+    .alias('help', 'h')
+    .describe('help', 'Show this help')
+
+    .describe('version', 'Show version number')
+
     .wrap(72)
     .argv;
+
+if (argv.help) {
+    optimist.showHelp();
+    process.exit();
+}
+
+if (argv.version) {
+    console.log(require('./package.json').version);
+    process.exit();
+}
 
 async.waterfall([
     // starts waterfall with program options
