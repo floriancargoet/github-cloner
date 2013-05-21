@@ -57,9 +57,11 @@ function checkPasswd(options, next){
     }
 }
 
-function fetchRepositories(options, next){
+function getRepositories(username, cb, page) {
+    var perPage = 100;
+    page = page || 1;
     request.get({
-        url : 'https://api.github.com/users/' + options.username + '/repos',
+        url : 'https://api.github.com/users/' + username + '/repos?per_page=' + perPage + '&page=' + page,
         headers : {
             'User-Agent' : 'floriancargoet/github-cloner'
         }
@@ -69,15 +71,41 @@ function fetchRepositories(options, next){
             return;
         }
         var repositories = JSON.parse(body);
+        if (repositories.length === perPage) {
+            console.log('Got ' + repositories.length + ' repositories. Loading more...');
+            getRepositories(username, function (err, nextRepositories) {
+                repositories = repositories.concat(nextRepositories);
+                if (page === 1) {
+                    console.log('Got a total of ' + repositories.length + ' repositories.');
+                }
+                cb(null, repositories);
+            }, page + 1);
+        } else {
+            if (page === 1) {
+                console.log('Got a total of ' + repositories.length + ' repositories.');
+            } else {
+                console.log('Got ' + repositories.length + ' repositories.');
+            }
+            cb(null, repositories);
+        }
+    });
+}
+
+
+function fetchRepositories(options, next){
+    getRepositories(options.username, function (err, repositories) {
+        if (err) {
+            next(err);
+            return;
+        }
         repositories = repositories.map(function (repo) {
-             return {
+            return {
                 name : repo.name,
                 url  : repo.ssh_url
-             };
+            };
         });
         next(null, options, repositories);
     });
-
 }
 
 function promptMultiselect(options, repositories, next){
