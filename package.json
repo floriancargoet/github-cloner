@@ -1,6 +1,6 @@
 {
   "name": "github-cloner",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "An interactive command line tool to list and clone your Github repositories",
   "main": "github-cloner.js",
   "repository": {
