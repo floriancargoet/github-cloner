@@ -1,4 +1,4 @@
-Github Cloner
+Github Cloner [![NPM version](https://badge.fury.io/js/github-cloner.png)](http://badge.fury.io/js/github-cloner)
 =============
 
 An interactive command line tool to list and clone your Github repositories.
